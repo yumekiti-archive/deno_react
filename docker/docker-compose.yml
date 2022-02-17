@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    nginx:
+        image: nginx:alpine
+        container_name: nginx
+        ports:
+            - 8080:80
+        volumes:
+            - ./nginx/:/etc/nginx/conf.d/
+        working_dir: /var/www/
+
+    react:
+        image: node:14.17.0
+        container_name: react
+        working_dir: /mnt/app/
+        volumes:
+            - ../react-app:/mnt/app/
+        command: [sh, -c, yarn && PORT=8080 yarn start]
+
+    deno:
+        build:
+            context: ../
+            dockerfile: ./docker/deno/dockerfile
+        container_name: deno
+        volumes:
+            - ../:/app

@@ -1,0 +1,14 @@
+FROM denoland/deno:1.18.2
+
+WORKDIR /app
+
+USER deno
+
+COPY ./deno/deps.ts ./deno/
+RUN deno cache ./deno/deps.ts
+
+ADD . .
+
+RUN deno cache ./deno/main.ts
+
+CMD ["run", "--allow-net", "./deno/main.ts"]

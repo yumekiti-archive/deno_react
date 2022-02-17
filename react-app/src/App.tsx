@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    axios.get("/api")
+    .then(res => {
+      setPosts(res.data.test)
+    })
+    
+},[])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +29,9 @@ function App() {
         >
           Learn React
         </a>
+        <p>{
+          posts  
+        }</p>
       </header>
     </div>
   );

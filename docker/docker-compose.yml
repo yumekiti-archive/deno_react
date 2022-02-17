@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 services:
     nginx:
@@ -7,7 +7,7 @@ services:
         ports:
             - 8080:80
         volumes:
-            - ./nginx/:/etc/nginx/conf.d/
+            - ./nginx:/etc/nginx/conf.d
         working_dir: /var/www/
 
     react:
@@ -15,7 +15,7 @@ services:
         container_name: react
         working_dir: /mnt/app/
         volumes:
-            - ../react-app:/mnt/app/
+            - ../react-app:/mnt/app
         command: [sh, -c, yarn && PORT=8080 yarn start]
 
     deno:

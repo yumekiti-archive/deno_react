@@ -1,5 +1,1 @@
 # Deno React
-
-```
-make init
-```
